@@ -173,23 +173,46 @@ GROUP BY level;
 
 ***
 
-## Suggested Repository Structure
+## Repository Structure
 
-You can organize this repository like this:
+The current repository is organized as follows:
 
 ```text
 .
-├── queries/
-│   ├── provinces.sql
-│   ├── districts.sql
-│   ├── communes.sql
-│   ├── villages.sql
-│   ├── search.sql
-│   └── validation.sql
-├── README.md
+├── cambodia_admin_codes.sql    # Database schema
+├── database_connection.py      # Database connection utilities
+├── api_server.py              # FastAPI server application
+├── admin_queries.py            # Administrative query functions
+├── static/
+│   ├── admin_interface.html    # Web interface
+│   └── admin_lookup.js         # Frontend JavaScript
+├── images/                     # Screenshots and demo images
+│   ├── Screenshot 2026-04-09 145732.png
+│   ├── Screenshot 2026-04-09 145747.png
+│   ├── Screenshot 2026-04-09 145800.png
+│   └── Screenshot 2026-04-09 145950.png
+└── README.md
 ```
 
-If your structure is different, feel free to update this section.
+***
+
+## Screenshots
+
+The `images/` directory contains screenshots demonstrating the administrative lookup functionality:
+
+### Administrative Interface
+![Administrative Interface](images/Screenshot%202026-04-09%20145732.png)
+
+### Province Selection
+![Province Selection](images/Screenshot%202026-04-09%20145747.png)
+
+### District Lookup Results
+![District Lookup](images/Screenshot%202026-04-09%20145800.png)
+
+### Commune and Village Query
+![Commune Village Query](images/Screenshot%202026-04-09%20145950.png)
+
+These screenshots show the web interface in action, demonstrating the cascading dropdown functionality for browsing Cambodia's administrative hierarchy.
 
 ***
 
