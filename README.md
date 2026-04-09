@@ -19,7 +19,7 @@ Province / Capital
 └── District / Municipality / Khan
     └── Commune / Sangkat
         └── Village
-````
+```
 
 The source data was originally extracted from a public PDF and then cleaned and structured into reusable formats.
 
@@ -140,7 +140,7 @@ SELECT * FROM provinces;
 ### 2. Get all districts in a province
 
 ```sql
-SELECT * 
+SELECT *
 FROM districts
 WHERE province_code = '01';
 ```
@@ -190,6 +190,8 @@ You can organize this repository like this:
 ```
 
 If your structure is different, feel free to update this section.
+
+***
 
 ## Important Note
 
@@ -246,12 +248,10 @@ Possible improvements include:
 *   performance improvements
 *   query examples for MySQL / PostgreSQL
 *   search and filtering enhancements
-*   
-***
 
+***
 ## Disclaimer
 
 This repository is a practical query workspace built on a community-prepared extraction of public administrative data.
 
 It is provided for convenience and learning purposes, and should not be considered a legally authoritative replacement for the original official publication.
-
