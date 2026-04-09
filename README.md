@@ -1,8 +1,14 @@
-# Quries_Data_MLMUPC
+# Cambodia Administrative Queries - MLMUPC Data
 
 SQL queries and examples built on top of the **Cambodia Administrative Codes Dataset**.
 
 This repository is for working with query examples, lookups, and data exploration using the structured MLMUPC administrative dataset.
+
+## What is MLMUPC?
+
+**MLMUPC** = **Ministry of Land Management, Urban Planning and Construction** (Cambodian government ministry)
+
+The administrative codes follow the official system established by MLMUPC and the Ministry of Interior.
 
 ---
 
