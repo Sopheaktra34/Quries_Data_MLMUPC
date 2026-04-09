@@ -3,8 +3,8 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
 
-from db import get_db, fetch_all, fetch_one
-import queries
+from database_connection import get_db, fetch_all, fetch_one
+import admin_queries
 
 app = FastAPI(title="MLMUPC Administrative API")
 
@@ -15,7 +15,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 @app.get("/")
 def home():
-    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    return FileResponse(os.path.join(STATIC_DIR, "admin_interface.html"))
 
 # ---------------- CASCADING ----------------
 
