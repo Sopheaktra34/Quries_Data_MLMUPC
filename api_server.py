@@ -21,19 +21,19 @@ def home():
 
 @app.get("/provinces")
 def provinces(db=Depends(get_db)):
-    return fetch_all(db, queries.province_query)
+    return fetch_all(db, admin_queries.province_query)
 
 @app.get("/districts")
 def districts(province_code: int, db=Depends(get_db)):
-    return fetch_all(db, queries.district_query, (province_code,))
+    return fetch_all(db, admin_queries.district_query, (province_code,))
 
 @app.get("/communes")
 def communes(district_code: int, db=Depends(get_db)):
-    return fetch_all(db, queries.commune_query, (district_code,))
+    return fetch_all(db, admin_queries.commune_query, (district_code,))
 
 @app.get("/villages")
 def villages(commune_code: int, db=Depends(get_db)):
-    return fetch_all(db, queries.village_query, (commune_code,))
+    return fetch_all(db, admin_queries.village_query, (commune_code,))
 
 # ---------------- LOOKUP WITH FULL CONTEXT ----------------
 
@@ -41,7 +41,7 @@ def villages(commune_code: int, db=Depends(get_db)):
 def lookup(code: str, db=Depends(get_db)):
 
     if len(code) == 2:
-        r = fetch_one(db, queries.province_context_query, (code,))
+        r = fetch_one(db, admin_queries.province_context_query, (code,))
         if not r:
             return {"error": "Not found"}
         return {"hierarchy": [
@@ -49,7 +49,7 @@ def lookup(code: str, db=Depends(get_db)):
         ]}
 
     if len(code) == 4:
-        r = fetch_one(db, queries.district_context_query, (code,))
+        r = fetch_one(db, admin_queries.district_context_query, (code,))
         if not r:
             return {"error": "Not found"}
         return {"hierarchy": [
@@ -58,7 +58,7 @@ def lookup(code: str, db=Depends(get_db)):
         ]}
 
     if len(code) == 6:
-        r = fetch_one(db, queries.commune_context_query, (code,))
+        r = fetch_one(db, admin_queries.commune_context_query, (code,))
         if not r:
             return {"error": "Not found"}
         return {"hierarchy": [
@@ -68,7 +68,7 @@ def lookup(code: str, db=Depends(get_db)):
         ]}
 
     if len(code) == 8:
-        r = fetch_one(db, queries.village_context_query, (code,))
+        r = fetch_one(db, admin_queries.village_context_query, (code,))
         if not r:
             return {"error": "Not found"}
         return {"hierarchy": [
@@ -85,7 +85,7 @@ def lookup(code: str, db=Depends(get_db)):
 @app.get("/lookup/name")
 def search_by_name(q: str, db=Depends(get_db)):
     key = f"%{q}%"
-    rows = fetch_all(db, queries.name_search_query, (key, key) * 4)
+    rows = fetch_all(db, admin_queries.name_search_query, (key, key) * 4)
     return [
         {"level": r[0], "code": r[1], "name_kh": r[2], "name_en": r[3]}
         for r in rows
@@ -94,10 +94,10 @@ def search_by_name(q: str, db=Depends(get_db)):
 @app.get("/counts/overall")
 def overall_counts(db=Depends(get_db)):
     return {
-        "provinces": fetch_one(db, queries.count_all_provinces)[0],
-        "districts": fetch_one(db, queries.count_all_districts)[0],
-        "communes":  fetch_one(db, queries.count_all_communes)[0],
-        "villages":  fetch_one(db, queries.count_all_villages)[0],
+        "provinces": fetch_one(db, admin_queries.count_all_provinces)[0],
+        "districts": fetch_one(db, admin_queries.count_all_districts)[0],
+        "communes":  fetch_one(db, admin_queries.count_all_communes)[0],
+        "villages":  fetch_one(db, admin_queries.count_all_villages)[0],
     }
     
 @app.get("/counts/context")
@@ -105,20 +105,20 @@ def context_counts(level: str, id: int, db=Depends(get_db)):
 
     if level == "province":
         return {
-            "districts": fetch_one(db, queries.count_districts_by_province, (id,))[0],
-            "communes":  fetch_one(db, queries.count_communes_by_province, (id,))[0],
-            "villages":  fetch_one(db, queries.count_villages_by_province, (id,))[0],
+            "districts": fetch_one(db, admin_queries.count_districts_by_province, (id,))[0],
+            "communes":  fetch_one(db, admin_queries.count_communes_by_province, (id,))[0],
+            "villages":  fetch_one(db, admin_queries.count_villages_by_province, (id,))[0],
         }
 
     if level == "district":
         return {
-            "communes": fetch_one(db, queries.count_communes_by_district, (id,))[0],
-            "villages": fetch_one(db, queries.count_villages_by_district, (id,))[0],
+            "communes": fetch_one(db, admin_queries.count_communes_by_district, (id,))[0],
+            "villages": fetch_one(db, admin_queries.count_villages_by_district, (id,))[0],
         }
 
     if level == "commune":
         return {
-            "villages": fetch_one(db, queries.count_villages_by_commune, (id,))[0],
+            "villages": fetch_one(db, admin_queries.count_villages_by_commune, (id,))[0],
         }
 
     return {"error": "Invalid level"}
